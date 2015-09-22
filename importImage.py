@@ -46,7 +46,7 @@ s3key=sorted_objects[0]['Key']
 logging.debug('[%s] found %d object(s), newest is %s dated %s', s3key, len(sorted_objects), sorted_objects[0]['Key'], sorted_objects[0]['LastModified'])
 
 # dirty hack but i don't have time to fight with import_image()
-json_string="{  \"Description\": \""+s3key+"\", \"DiskContainers\": [ { \"Description\": \"First CLI task\", \"UserBucket\": { \"S3Bucket\": \""+DRBUCKET+"\", \"S3Key\" : \""+s3key+"\" } } ]}"
+json_string="{  \"Description\": \""+s3key+"\", \"DiskContainers\": [ { \"Description\": \"VM Import "+s3key+"\", \"UserBucket\": { \"S3Bucket\": \""+DRBUCKET+"\", \"S3Key\" : \""+s3key+"\" } } ]}"
 import_output_dirty=check_output(["/usr/bin/aws","ec2","import-image","--cli-input-json", json_string])
 
 # convert output to native python types
